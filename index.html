@@ -16,9 +16,192 @@
 <meta property="twitter:description" content="AI & Cloud Solutions for modern enterprises.">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .glass { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-        .hero-gradient { background: radial-gradient(circle at center, rgba(99, 102, 241, 0.15) 0%, transparent 70%); }
-    </style>
+    /* تنسيقات عامة لتناسق الموقع (اختياري) */
+    body {
+        background-color: #000000;
+        color: #ffffff;
+    }
+    
+    /* تنسيقات المساعد الذكي */
+    #ilyom-chat-container * {
+        box-sizing: border-box;
+    }
+    #ilyom-chat-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 9999;
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+    #ilyom-chat-button {
+        background: #00e5ff; /* Infrastructure Color */
+        color: #000;
+        border: none;
+        border-radius: 50%;
+        width: 65px;
+        height: 65px;
+        cursor: pointer;
+        box-shadow: 0 5px 20px rgba(0, 229, 255, 0.4);
+        font-size: 28px;
+        transition: transform 0.3s, box-shadow 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #ilyom-chat-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 25px rgba(0, 229, 255, 0.6);
+    }
+    #ilyom-chat-window {
+        display: none;
+        width: 350px;
+        height: 500px;
+        background: #0d0d0d; /* Dark Background */
+        border: 1px solid #222;
+        border-radius: 18px;
+        flex-direction: column;
+        position: absolute;
+        bottom: 85px;
+        right: 0;
+        overflow: hidden;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+    }
+    #ilyom-chat-header {
+        background: #111;
+        color: #00e5ff; /* Infrastructure Color for Title */
+        padding: 18px;
+        font-weight: bold;
+        border-bottom: 1px solid #222;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 16px;
+    }
+    #ilyom-messages {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+        background: #0d0d0d;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+    #ilyom-input-area {
+        padding: 12px;
+        border-top: 1px solid #222;
+        background: #111;
+        display: flex;
+        gap: 10px;
+    }
+    #ilyom-input {
+        flex: 1;
+        background: #1a1a1a;
+        border: 1px solid #333;
+        color: white;
+        padding: 12px;
+        border-radius: 10px;
+        outline: none;
+        font-size: 14px;
+    }
+    #ilyom-input:focus {
+        border-color: #00e5ff;
+    }
+    #ilyom-send-btn {
+        background: #00e5ff; /* Infrastructure Color for Button */
+        color: #000;
+        border: none;
+        padding: 12px 22px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+    #ilyom-send-btn:hover {
+        background: #00c8e0;
+    }
+
+    /* أنماط الرسائل */
+    .ilyom-msg-bot {
+        background: #1a1a1a;
+        color: #eee;
+        padding: 12px 16px;
+        border-radius: 14px 14px 14px 4px;
+        align-self: flex-start;
+        max-width: 85%;
+        border: 1px solid #222;
+    }
+    .ilyom-msg-user {
+        background: #00e5ff33; /* Faded Infrastructure color */
+        color: #fff;
+        padding: 12px 16px;
+        border-radius: 14px 14px 4px 14px;
+        align-self: flex-end;
+        max-width: 85%;
+        border: 1px solid #00e5ff66;
+    }
+</style>
+
+<div id="ilyom-chat-container">
+    <button id="ilyom-chat-button" onclick="toggleIlyomChat()">💬</button>
+    
+    <div id="ilyom-chat-window">
+        <div id="ilyom-chat-header">
+            <span>ILYOM AI Assistant</span>
+            <button onclick="toggleIlyomChat()" style="background: none; border: none; color: #555; cursor: pointer; font-size: 22px; line-height: 1;">✕</button>
+        </div>
+        <div id="ilyom-messages">
+            <div class="ilyom-msg-bot">
+                مرحباً بك في **ILYOM**! كيف يمكن لـ <span style="color: #00e5ff; font-weight: bold;">Infrastructure</span> الذكاء الاصطناعي الخاصة بنا مساعدتك اليوم؟
+            </div>
+        </div>
+        <div id="ilyom-input-area">
+            <input type="text" id="ilyom-input" placeholder="اكتب سؤالك هنا...">
+            <button id="ilyom-send-btn" onclick="sendIlyomMessage()">إرسال</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleIlyomChat() {
+    const win = document.getElementById('ilyom-chat-window');
+    win.style.display = win.style.display === 'none' ? 'flex' : 'none';
+    if(win.style.display === 'flex') document.getElementById('ilyom-input').focus();
+}
+
+async function sendIlyomMessage() {
+    const input = document.getElementById('ilyom-input');
+    const container = document.getElementById('ilyom-messages');
+    const msg = input.value.trim();
+    
+    if (!msg) return;
+
+    // User Message (Cyan theme)
+    container.innerHTML += `<div class="ilyom-msg-user">${msg}</div>`;
+    input.value = '';
+    container.scrollTop = container.scrollHeight;
+
+    try {
+        const response = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: msg })
+        });
+        const data = await response.json();
+        
+        // Bot Response (Dark theme)
+        container.innerHTML += `<div class="ilyom-msg-bot">${data.reply}</div>`;
+        container.scrollTop = container.scrollHeight;
+    } catch (err) {
+        container.innerHTML += `<div style="color: #ff4d4d; font-size: 12px; text-align: center; padding: 10px;">عذراً، حدث خطأ في الاتصال.</div>`;
+    }
+}
+
+document.getElementById('ilyom-input').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') sendIlyomMessage();
+});
+</script>
 </head>
 <body class="bg-slate-900 text-white antialiased font-sans">
 
