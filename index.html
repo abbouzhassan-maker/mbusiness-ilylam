@@ -179,6 +179,7 @@ async function askILYOM(message) {
 function toggleIlyomChat() {
     const win = document.getElementById('ilyom-chat-window');
     win.style.display = win.style.display === 'none' ? 'flex' : 'none';
+    if(win.style.display === 'flex') document.getElementById('ilyom-input').focus();
 }
 
 async function sendIlyomMessage() {
@@ -188,8 +189,8 @@ async function sendIlyomMessage() {
     
     if (!msg) return;
 
-    // إضافة رسالة المستخدم للواجهة
-    container.innerHTML += `<div style="background: #007bff; color: white; padding: 10px; border-radius: 10px; align-self: flex-end; max-width: 80%; font-size: 14px;">${msg}</div>`;
+    // User Message (Blue/Dark)
+    container.innerHTML += `<div style="background: #111; color: #4db8ff; padding: 12px; border-radius: 12px; align-self: flex-end; max-width: 85%; line-height: 1.5; border: 1px solid #4db8ff33;">${msg}</div>`;
     input.value = '';
     container.scrollTop = container.scrollHeight;
 
@@ -201,15 +202,14 @@ async function sendIlyomMessage() {
         });
         const data = await response.json();
         
-        // إضافة رد البوت
-        container.innerHTML += `<div style="background: #e9ecef; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 80%; font-size: 14px;">${data.reply}</div>`;
+        // Bot Response (Grey/Dark)
+        container.innerHTML += `<div style="background: #1a1a1a; color: #eee; padding: 12px; border-radius: 12px; align-self: flex-start; max-width: 85%; line-height: 1.5; border: 1px solid #222;">${data.reply}</div>`;
         container.scrollTop = container.scrollHeight;
     } catch (err) {
-        container.innerHTML += `<div style="color: red; font-size: 12px; text-align: center;">عذراً، حدث خطأ في الاتصال.</div>`;
+        container.innerHTML += `<div style="color: #ff4d4d; font-size: 12px; text-align: center; padding: 10px;">عذراً، حدث خطأ في الاتصال.</div>`;
     }
 }
 
-// دعم الإرسال عبر زر Enter
 document.getElementById('ilyom-input').addEventListener('keypress', (e) => {
     if (e.key === 'Enter') sendIlyomMessage();
 });
