@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ILYOM | Next-Gen AI Infrastructure</title>
+    <title>ILYOM | Premium AI & Infrastructure Solutions</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #00e5ff 0%, #00ff88 100%);
-            --footer-gradient: linear-gradient(to bottom, #002b24, #000000);
             --dark-bg: #000000;
+            --card-bg: #0a0a0a;
             --accent-cyan: #00e5ff;
             --accent-green: #00ff88;
         }
@@ -17,227 +17,66 @@
         body {
             background-color: var(--dark-bg);
             color: #ffffff;
-            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', sans-serif;
             margin: 0;
-            padding: 0;
-            overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* --- Main Navigation --- */
+        /* --- Navigation --- */
         nav {
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.9);
             padding: 20px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid rgba(0, 255, 136, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            position: sticky; top: 0; z-index: 1000;
         }
-
-        .logo {
-            font-size: 28px;
-            font-weight: 900;
-            letter-spacing: 1px;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .nav-links a {
-            color: #bbb;
-            text-decoration: none;
-            margin-left: 30px;
-            font-size: 14px;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-green);
-        }
-
-        .support-link {
-            color: var(--accent-cyan) !important;
-            border: 1px solid var(--accent-cyan);
-            padding: 5px 15px;
-            border-radius: 20px;
-        }
+        .logo { font-size: 26px; font-weight: 900; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links a { color: #888; text-decoration: none; margin-left: 25px; font-size: 14px; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent-green); }
 
         /* --- Hero Section --- */
-        .hero {
-            text-align: center;
-            padding: 150px 20px;
-            background: radial-gradient(circle at center, #00ff8811 0%, transparent 70%);
-        }
-
-        .hero-title {
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            font-weight: 800;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 0;
-        }
-
-        .hero-subtitle {
-            color: #888;
-            font-size: 1.2rem;
-            margin-top: 20px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .btn-primary {
-            margin-top: 40px;
-            background: var(--primary-gradient);
-            color: #000;
-            padding: 15px 40px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            transition: 0.3s;
-            box-shadow: 0 10px 20px rgba(0, 255, 136, 0.2);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(0, 255, 136, 0.4);
-        }
-
-        /* --- Footer Section --- */
-        footer {
-            background: var(--footer-gradient);
-            padding: 80px 8% 40px;
-            border-top: 1px solid rgba(0, 255, 136, 0.2);
-            text-align: center;
-        }
-
-        .social-links {
-            margin-bottom: 40px;
-        }
-
-        .social-links a {
-            color: white;
-            font-size: 26px;
-            margin: 0 20px;
-            transition: 0.3s;
-        }
-
-        .social-links a:hover {
-            color: var(--accent-cyan);
-            transform: scale(1.2);
-        }
-
-        .checkout-box {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 20px;
-            display: inline-block;
-        }
-
-        .checkout-box h4 {
-            margin: 0 0 15px;
-            color: #888;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 12px;
-        }
-
-        .payment-icons {
-            font-size: 35px;
-            display: flex;
+        .hero { text-align: center; padding: 120px 20px; }
+        .hero-title { font-size: 4rem; font-weight: 800; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0; }
+        
+        /* --- Services Section --- */
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
-            justify-content: center;
-            opacity: 0.8;
+            padding: 80px 8%;
         }
-
-        .ssl-status {
-            display: block;
-            margin-top: 20px;
-            color: var(--accent-green);
-            font-size: 13px;
-            font-weight: bold;
-        }
-
-        /* --- AI Assistant Widget --- */
-        #chat-widget {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 2000;
-        }
-
-        #chat-button {
-            background: var(--primary-gradient);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            border: none;
-            cursor: pointer;
-            font-size: 24px;
-            box-shadow: 0 10px 25px rgba(0, 229, 255, 0.3);
-        }
-
-        #chat-window {
-            display: none;
-            width: 350px;
-            height: 500px;
-            background: #0a0a0a;
-            border: 1px solid #222;
+        .service-card {
+            background: var(--card-bg);
+            padding: 40px;
             border-radius: 20px;
-            position: absolute;
-            bottom: 80px;
-            right: 0;
-            flex-direction: column;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid #111;
+            transition: 0.3s;
+            text-align: center;
         }
-
-        .chat-header {
-            background: #111;
-            padding: 15px;
-            border-bottom: 1px solid #222;
-            color: var(--accent-cyan);
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
+        .service-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.1);
         }
+        .service-card i { font-size: 40px; margin-bottom: 20px; color: var(--accent-green); }
+        .service-card h3 { color: var(--accent-cyan); margin-bottom: 15px; }
+        .service-card p { color: #777; font-size: 14px; }
 
-        #chat-messages {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            font-size: 14px;
-        }
+        /* --- Footer & Checkout --- */
+        footer { background: linear-gradient(to bottom, #002b24, #000); padding: 60px 8%; text-align: center; border-top: 1px solid #111; }
+        .checkout-box { background: rgba(255,255,255,0.03); padding: 25px; border-radius: 15px; display: inline-block; margin-top: 30px; }
+        .payment-icons { font-size: 30px; display: flex; gap: 20px; justify-content: center; margin: 15px 0; opacity: 0.7; }
 
-        .bot-msg { background: #1a1a1a; padding: 10px; border-radius: 10px; align-self: flex-start; border-left: 3px solid var(--accent-green); }
-        .user-msg { background: var(--accent-cyan); color: black; padding: 10px; border-radius: 10px; align-self: flex-end; font-weight: 500; }
-
-        .chat-input-area {
-            padding: 15px;
-            border-top: 1px solid #222;
-            display: flex;
-            gap: 10px;
-        }
-
-        #user-input {
-            flex: 1;
-            background: #000;
-            border: 1px solid #333;
-            color: white;
-            padding: 10px;
-            border-radius: 8px;
-            outline: none;
-        }
+        /* --- Chat Widget --- */
+        #chat-widget { position: fixed; bottom: 30px; right: 30px; z-index: 2000; }
+        #chat-btn { background: var(--primary-gradient); border:none; width:60px; height:60px; border-radius:50%; cursor:pointer; font-size:24px; box-shadow: 0 5px 15px rgba(0,229,255,0.3); }
+        #chat-win { display: none; width: 350px; height: 500px; background: #080808; border: 1px solid #222; border-radius: 20px; position: absolute; bottom: 80px; right: 0; flex-direction: column; overflow: hidden; }
+        .chat-head { background: #111; padding: 15px; border-bottom: 1px solid #222; color: var(--accent-cyan); font-weight: bold; display: flex; justify-content: space-between; }
+        #chat-msgs { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 13px; }
+        .bot-msg { background: #111; padding: 10px; border-radius: 10px; align-self: flex-start; border-left: 2px solid var(--accent-green); }
+        .user-msg { background: var(--accent-cyan); color: #000; padding: 10px; border-radius: 10px; align-self: flex-end; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -246,88 +85,91 @@
         <div class="logo">ILYOM</div>
         <div class="nav-links">
             <a href="#">Home</a>
-            <a href="#">Infrastructure</a>
-            <a href="#">AI Agents</a>
-            <a href="#" class="support-link">Support</a>
+            <a href="#services">Services</a>
+            <a href="#">Support</a>
         </div>
     </nav>
 
     <section class="hero">
-        <h1 class="hero-title">AI Infrastructure For The Future</h1>
-        <p class="hero-subtitle">Scale your business with high-performance hosting and custom AI agents powered by Gemini 1.5 Flash.</p>
-        <a href="#" class="btn-primary">Get Started Now</a>
+        <h1 class="hero-title">Elevate Your Infrastructure</h1>
+        <p style="color: #666; font-size: 1.1rem; margin-top: 15px;">Advanced Web, App & AI Solutions for modern businesses.</p>
+    </section>
+
+    <section id="services" class="services-container">
+        <div class="service-card">
+            <i class="fas fa-server"></i>
+            <h3>High-Performance Hosting</h3>
+            <p>Reliable, scalable, and secure hosting solutions optimized for speed and global reach.</p>
+        </div>
+        <div class="service-card">
+            <i class="fas fa-robot"></i>
+            <h3>AI Customers & Agents</h3>
+            <p>Deploy custom AI agents that manage customer interactions and sales automatically.</p>
+        </div>
+        <div class="service-card">
+            <i class="fas fa-database"></i>
+            <h3>Appwrite Integration</h3>
+            <p>Full-stack backend implementation using Appwrite for secure and fast database management.</p>
+        </div>
+        <div class="service-card">
+            <i class="fas fa-code"></i>
+            <h3>Web Creation</h3>
+            <p>Tailor-made websites designed for high conversion and premium user experience.</p>
+        </div>
+        <div class="service-card">
+            <i class="fas fa-mobile-alt"></i>
+            <h3>App Development</h3>
+            <p>Innovative mobile and desktop applications built with the latest development frameworks.</p>
+        </div>
     </section>
 
     <footer>
-        <div class="social-links">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-tiktok"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
+        <div class="social-links" style="margin-bottom: 30px;">
+            <a href="#" style="color:white; margin: 0 15px; font-size: 20px;"><i class="fab fa-facebook"></i></a>
+            <a href="#" style="color:white; margin: 0 15px; font-size: 20px;"><i class="fab fa-tiktok"></i></a>
+            <a href="#" style="color:white; margin: 0 15px; font-size: 20px;"><i class="fab fa-instagram"></i></a>
         </div>
-
         <div class="checkout-box">
-            <h4>Secure Checkout</h4>
+            <h4 style="font-size: 11px; letter-spacing: 2px; color: #555; margin: 0;">SECURE CHECKOUT</h4>
             <div class="payment-icons">
                 <i class="fab fa-cc-visa"></i>
                 <i class="fab fa-cc-mastercard"></i>
                 <i class="fab fa-stripe"></i>
             </div>
-            <span class="ssl-status"><i class="fas fa-lock"></i> SSL SECURE 256-BIT ENCRYPTION</span>
+            <span style="color: var(--accent-green); font-size: 12px; font-weight: bold;"><i class="fas fa-lock"></i> SSL SECURE</span>
         </div>
-
-        <p style="color: #444; font-size: 12px; margin-top: 50px;">&copy; 2026 ILYOM AI Infrastructure. All rights reserved.</p>
+        <p style="color: #333; font-size: 11px; margin-top: 40px;">&copy; 2026 ILYOM Infrastructure. All rights reserved.</p>
     </footer>
 
     <div id="chat-widget">
-        <button id="chat-button" onclick="toggleChat()">🤖</button>
-        <div id="chat-window">
-            <div class="chat-header">
-                <span>ILYOM Assistant</span>
-                <button onclick="toggleChat()" style="background:none; border:none; color:#555; cursor:pointer;">✕</button>
-            </div>
-            <div id="chat-messages">
-                <div class="bot-msg">Welcome to ILYOM. How can our AI Infrastructure help you today?</div>
-            </div>
-            <div class="chat-input-area">
-                <input type="text" id="user-input" placeholder="Type a message...">
-                <button onclick="sendMessage()" style="background:var(--accent-green); border:none; padding:10px; border-radius:8px; cursor:pointer; font-weight:bold;">Send</button>
+        <button id="chat-btn" onclick="toggleChat()">🤖</button>
+        <div id="chat-win">
+            <div class="chat-head"><span>ILYOM Assistant</span><button onclick="toggleChat()" style="background:none; border:none; color:#555; cursor:pointer;">✕</button></div>
+            <div id="chat-msgs"><div class="bot-msg">Welcome to ILYOM. How can I help you with our Hosting, AI, or App Development services?</div></div>
+            <div style="padding:15px; border-top:1px solid #222; display:flex; gap:10px;">
+                <input type="text" id="chat-in" placeholder="Ask about our services..." style="flex:1; background:#000; border:1px solid #333; color:white; padding:10px; border-radius:8px; outline:none;">
+                <button onclick="sendMsg()" style="background:var(--accent-green); border:none; padding:10px; border-radius:8px; cursor:pointer; font-weight:bold;">Send</button>
             </div>
         </div>
     </div>
 
     <script>
-        function toggleChat() {
-            const win = document.getElementById('chat-window');
-            win.style.display = win.style.display === 'none' ? 'flex' : 'none';
-        }
-
-        async function sendMessage() {
-            const input = document.getElementById('user-input');
-            const container = document.getElementById('chat-messages');
+        function toggleChat() { const win = document.getElementById('chat-win'); win.style.display = win.style.display === 'none' ? 'flex' : 'none'; }
+        async function sendMsg() {
+            const input = document.getElementById('chat-in');
+            const msgs = document.getElementById('chat-msgs');
             if(!input.value) return;
-
-            const userText = input.value;
-            container.innerHTML += `<div class="user-msg">${userText}</div>`;
+            const text = input.value;
+            msgs.innerHTML += `<div class="user-msg">${text}</div>`;
             input.value = '';
-            container.scrollTop = container.scrollHeight;
-
+            msgs.scrollTop = msgs.scrollHeight;
             try {
-                const response = await fetch('/api/chat', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ message: userText })
-                });
-                const data = await response.json();
-                container.innerHTML += `<div class="bot-msg">${data.reply}</div>`;
-            } catch (e) {
-                container.innerHTML += `<div style="color:red; font-size:10px;">Connection Error.</div>`;
-            }
-            container.scrollTop = container.scrollHeight;
+                const res = await fetch('/api/chat', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ message: text }) });
+                const data = await res.json();
+                msgs.innerHTML += `<div class="bot-msg">${data.reply}</div>`;
+            } catch (e) { msgs.innerHTML += `<div style="color:red; font-size:10px;">Error.</div>`; }
+            msgs.scrollTop = msgs.scrollHeight;
         }
-
-        document.getElementById('user-input').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendMessage();
-        });
     </script>
 </body>
 </html>
