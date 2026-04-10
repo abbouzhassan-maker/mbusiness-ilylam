@@ -253,28 +253,44 @@
     <script>
         function toggleChat() { const win = document.getElementById('chat-win'); win.style.display = win.style.display === 'none' ? 'flex' : 'none'; }
         
-        async function sendMsg() {
-            const input = document.getElementById('chat-input');
-            const msgs = document.getElementById('chat-msgs');
-            if(!input.value) return;
-            const text = input.value;
-            msgs.innerHTML += `<div class="user-msg">${text}</div>`;
-            input.value = '';
-            msgs.scrollTop = msgs.scrollHeight;
+      async function sendMsg() {
+    const input = document.getElementById('chat-input');
+    const msgs = document.getElementById('chat-msgs');
+    if(!input.value) return;
+    
+    const text = input.value;
+    msgs.innerHTML += `<div class="user-msg">${text}</div>`;
+    input.value = '';
+    msgs.scrollTop = msgs.scrollHeight;
 
-            try {
-                const res = await fetch('/api/chat', { 
-                    method: 'POST', 
-                    headers: {'Content-Type': 'application/json'}, 
-                    body: JSON.stringify({ message: text }) 
-                });
-                const data = await res.json();
-                msgs.innerHTML += `<div class="bot-msg">${data.reply}</div>`;
-            } catch (e) {
-                msgs.innerHTML += `<div style="color:red; font-size:10px; text-align:center;">Connection error.</div>`;
-            }
-            msgs.scrollTop = msgs.scrollHeight;
+    // إظهار علامة "جاري التفكير..."
+    const typingIndicator = document.createElement('div');
+    typingIndicator.className = 'bot-msg';
+    typingIndicator.innerText = "...";
+    msgs.appendChild(typingIndicator);
+
+    try {
+        // الاتصال بالملف الوسيط الذي أنشأناه في Vercel
+        const res = await fetch('/api/chat', { 
+            method: 'POST', 
+            headers: { 'Content-Type': 'application/json' }, 
+            body: JSON.stringify({ message: text }) 
+        });
+
+        const data = await res.json();
+        typingIndicator.remove(); // حذف علامة التفكير
+
+        if (data.reply) {
+            msgs.innerHTML += `<div class="bot-msg">${data.reply}</div>`;
+        } else {
+            msgs.innerHTML += `<div class="bot-msg" style="color:red;">خطأ في استلام الرد.</div>`;
         }
+    } catch (e) {
+        typingIndicator.remove();
+        msgs.innerHTML += `<div class="bot-msg" style="color:red;">فشل الاتصال بالمساعد.</div>`;
+    }
+    msgs.scrollTop = msgs.scrollHeight;
+}
 
         document.getElementById('chat-input').addEventListener('keypress', (e) => {
             if (e.key === 'Enter') sendMsg();
