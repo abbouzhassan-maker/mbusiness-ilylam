@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ILYOM | Digital Infrastructure & Solutions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
@@ -14,21 +14,21 @@
             --light-gray: #f9f9fb;
             --text-main: #1d1d1f;
             --text-secondary: #6e6e73;
-            --accent-cyan: #00d2ff;
-            /* اللون المشرق الذي ينطلق يميناً */
             --ocean-blend: linear-gradient(to right, #028090 0%, #00bf8f 100%);
+            --glass-green: rgba(0, 191, 143, 0.08);
+            --border-light: rgba(0, 191, 143, 0.2);
         }
 
         body {
             background-color: var(--light-gray);
             color: var(--text-main);
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: 'Inter', sans-serif;
             margin: 0;
             line-height: 1.6;
             scroll-behavior: smooth;
         }
 
-        /* --- الهيدر باللون المشرق --- */
+        /* --- الهيدر المشرق --- */
         nav {
             background: var(--ocean-blend);
             padding: 15px 8%;
@@ -55,18 +55,17 @@
             letter-spacing: 4px;
             color: #fff;
             text-decoration: none;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        /* خانة البحث الزجاجية */
+        /* خانة البحث */
         .search-box {
             position: relative;
             width: 60%;
-            max-width: 700px;
+            max-width: 600px;
         }
         .search-box input {
             width: 100%;
-            padding: 14px 45px 14px 25px;
+            padding: 12px 45px 12px 25px;
             background: rgba(255, 255, 255, 0.15);
             border: 1px solid rgba(255, 255, 255, 0.3);
             color: #fff;
@@ -75,14 +74,12 @@
             outline: none;
             font-family: 'Inter', sans-serif;
             transition: 0.3s;
-            box-sizing: border-box;
             backdrop-filter: blur(8px);
         }
         .search-box input::placeholder { color: rgba(255, 255, 255, 0.8); }
         .search-box input:focus {
             background: rgba(255, 255, 255, 0.25);
             border-color: #fff;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
         .search-box i {
             position: absolute;
@@ -90,120 +87,99 @@
             top: 50%;
             transform: translateY(-50%);
             color: rgba(255, 255, 255, 0.9);
-            transition: 0.3s;
         }
 
-        /* نتائج البحث المنسدلة */
-        .search-results {
-            display: none;
-            position: absolute;
-            top: 110%;
-            left: 0;
-            width: 100%;
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border: 1px solid #eee;
-            overflow: hidden;
-            z-index: 1001;
-        }
-        .search-item {
-            padding: 15px 20px;
-            cursor: pointer;
-            font-size: 14px;
-            border-bottom: 1px solid #fafafa;
+        /* القائمة السفلية (روابط التصفح + الحساب) */
+        .nav-bottom {
             display: flex;
+            justify-content: space-between; /* تفصل بين القائمة الرئيسية والحساب */
             align-items: center;
-            gap: 12px;
-            transition: 0.2s;
-            color: var(--text-main);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 15px;
+            width: 100%;
         }
-        .search-item i { position: static; transform: none; color: #028090; font-size: 14px; }
-        .search-item:hover { background: #f4fcff; padding-left: 25px; }
 
         .nav-links {
             display: flex;
-            gap: 35px;
-            width: 100%;
-            justify-content: flex-start;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            padding-top: 15px;
+            gap: 30px;
         }
 
         .nav-links a { 
             color: rgba(255, 255, 255, 0.9); 
             text-decoration: none; 
-            font-size: 13px; 
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 15px; /* تم تعديل الحجم والخط ليكون متناسقاً وبسيطاً */
+            font-weight: 500;
             transition: 0.3s; 
         }
-        .nav-links a:hover { color: #fff; text-shadow: 0 0 8px rgba(255,255,255,0.6); }
+        .nav-links a:hover { color: #fff; }
+
+        .nav-auth {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .nav-auth a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-auth .sign-up-btn {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .nav-auth .sign-up-btn:hover {
+            background: #fff;
+            color: #028090;
+        }
 
         /* --- واجهة العالم الرقمي --- */
         .hero { 
             text-align: center; 
             padding: 120px 20px;
-            position: relative;
-            overflow: hidden;
             background: var(--white-bg);
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%; right: -50%; bottom: -50%;
-            background-image: 
-                linear-gradient(rgba(2, 128, 144, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(2, 128, 144, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
-            z-index: 0;
-            transform: perspective(500px) rotateX(60deg);
-            animation: digitalPulse 15s linear infinite;
-        }
-        @keyframes digitalPulse {
-            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
-            100% { transform: perspective(500px) rotateX(60deg) translateY(40px); }
-        }
 
-        /* صندوق الزجاج الأخضر المفتوح للنص الرئيسي */
+        /* صندوق الزجاج الأخضر المفتوح */
         .hero-glass {
-            position: relative;
-            z-index: 1;
-            background: rgba(0, 191, 143, 0.08);
+            background: var(--glass-green);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 191, 143, 0.3);
+            border: 1px solid var(--border-light);
             border-radius: 24px;
             padding: 60px 40px;
             max-width: 800px;
-            box-shadow: 0 15px 35px rgba(2, 128, 144, 0.15);
+            box-shadow: 0 15px 35px rgba(2, 128, 144, 0.05);
         }
 
         .hero-title { 
-            font-size: 3.8rem; 
+            font-size: 3.5rem; 
             font-weight: 800; 
             color: var(--text-main);
             margin: 0; 
-            letter-spacing: -1px;
             line-height: 1.2;
         }
         .hero-subtitle {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--text-secondary);
-            margin-top: 25px;
+            margin-top: 20px;
             max-width: 650px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        /* --- قسم الخدمات بروح البراند الجديدة (Cards) --- */
+        /* --- قسم الخدمات البسيط والمينيمال (تم التعديل لإزالة التشويش) --- */
         .section-header { text-align: center; padding: 80px 0 40px; background: var(--light-gray); }
-        .section-header h2 { font-size: 2.5rem; color: var(--text-main); margin: 0; }
+        .section-header h2 { font-size: 2.2rem; color: var(--text-main); margin: 0; }
+        .section-header p { color: var(--text-secondary); margin-top: 10px; font-size: 1.1rem; }
 
         .services-container {
             background: var(--light-gray);
@@ -212,268 +188,157 @@
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-            max-width: 1200px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
-        .service-card {
+        /* بطاقات بسيطة ونظيفة بدون صور مزعجة */
+        .service-card-clean {
             background: #fff;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-            border: 1px solid #eaeaea;
-            transition: 0.4s ease;
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: left;
+            border: 1px solid #eee;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+            transition: 0.3s;
+        }
+        .service-card-clean:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(2, 128, 144, 0.08);
+            border-color: rgba(2, 128, 144, 0.3);
+        }
+
+        .service-icon-box {
+            width: 60px;
+            height: 60px;
+            background: var(--glass-green);
+            color: #00bf8f;
+            border-radius: 14px;
             display: flex;
-            flex-direction: column;
-        }
-        .service-card:hover { 
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(2, 128, 144, 0.1);
-            border-color: rgba(2, 128, 144, 0.2);
-        }
-
-        .service-visual {
-            height: 220px;
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-        }
-        .service-visual img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: 0.5s ease;
-        }
-        .service-card:hover .service-visual img {
-            transform: scale(1.05);
-        }
-
-        .service-content {
-            padding: 35px 30px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-        .service-content h3 { margin: 0 0 15px; color: var(--text-main); font-size: 1.6rem; }
-        .service-content p { color: var(--text-secondary); font-size: 15px; line-height: 1.7; margin-bottom: 25px; flex-grow: 1; }
-
-        /* أزرار الخدمات الفردية */
-        .btn-brand {
-            display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            padding: 12px 24px;
-            background: transparent;
-            color: #028090;
-            border: 2px solid #028090;
-            border-radius: 30px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: 0.3s;
-            align-self: flex-start;
+            font-size: 24px;
+            margin-bottom: 25px;
         }
-        .btn-brand:hover {
+
+        .service-card-clean h3 { margin: 0 0 15px; color: var(--text-main); font-size: 1.4rem; }
+        .service-card-clean p { color: var(--text-secondary); font-size: 15px; line-height: 1.6; margin-bottom: 0; }
+
+        /* --- قسم الدفع والاشتراكات (جديد) --- */
+        .pricing-section {
+            background: #fff;
+            padding: 80px 8%;
+            text-align: center;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 40px auto 0;
+        }
+
+        .pricing-card {
+            border: 1px solid #eee;
+            border-radius: 20px;
+            padding: 40px 30px;
+            background: #fafafa;
+            transition: 0.3s;
+            position: relative;
+        }
+        .pricing-card.popular {
+            background: var(--glass-green);
+            border-color: var(--border-light);
+        }
+
+        .pricing-card h3 { font-size: 1.5rem; margin-bottom: 10px; color: var(--text-main); }
+        .price { font-size: 2.5rem; font-weight: 700; color: #028090; margin-bottom: 20px; }
+        .price span { font-size: 1rem; color: var(--text-secondary); font-weight: 400; }
+        
+        .pricing-features { list-style: none; padding: 0; margin: 0 0 30px; text-align: left; }
+        .pricing-features li { margin-bottom: 12px; font-size: 14px; color: var(--text-secondary); }
+        .pricing-features li i { color: #00bf8f; margin-right: 8px; }
+
+        .btn-pay {
+            display: block;
+            width: 100%;
+            padding: 14px;
             background: var(--ocean-blend);
             color: #fff;
-            border-color: transparent;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .btn-pay:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        .payment-methods {
+            margin-top: 40px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        .payment-icons {
+            margin-top: 15px;
+            font-size: 28px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            color: #999;
         }
 
-        /* --- قسم الدعوة لاتخاذ إجراء (Call to Action) - تم تحديث الخلفية بالصورة الثانية --- */
+        /* --- قسم الدعوة لاتخاذ إجراء (Call to Action) --- */
         .cta-section {
-            /* استبدال الخلفية بصورة Unsplash المقدمة لتكون الخلفية الجديدة */
-            background: url('https://images.unsplash.com/photo-1549692520-acc6669e2f0c?q=80&w=600&auto=format&fit=crop') center center / cover no-repeat;
+            background: var(--ocean-blend);
             padding: 80px 20px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-            /* الحفاظ على لون النص الأبيض لضمان التباين مع الصورة الداكنة */
-            color: #fff;
         }
-        
-        .cta-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .cta-content h2 {
-            font-family: 'Cinzel', serif;
-            font-size: 2.8rem;
-            color: #fff;
-            margin-bottom: 20px;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        .cta-content p {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1.1rem;
-            margin-bottom: 40px;
-        }
-
+        .cta-content h2 { font-family: 'Cinzel', serif; font-size: 2.5rem; color: #fff; margin-bottom: 20px; }
+        .cta-content p { color: rgba(255, 255, 255, 0.9); font-size: 1.1rem; margin-bottom: 40px; }
         .btn-cta {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 15px 40px;
-            background: #fff;
-            color: #028090;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            text-decoration: none;
-            transition: 0.4s ease;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            display: inline-flex; align-items: center; gap: 10px; padding: 15px 40px;
+            background: #fff; color: #028090; border-radius: 30px; font-weight: 700;
+            text-decoration: none; transition: 0.3s;
         }
-
-        .btn-cta:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-            background: #f4fcff;
-        }
-        
-        /* تأثيرات خلفية قسم الـ CTA (تمت إزالتها للسماح بظهور الصورة بوضوح) */
-        /*
-        .cta-section::after {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
-            z-index: 0;
-            animation: rotateBg 25s linear infinite;
-        }
-        @keyframes rotateBg {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        */
+        .btn-cta:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 
         /* --- الفوتر --- */
-        .brand-footer {
-            background: #111; /* جعل الفوتر أغمق قليلاً ليبرز قسم الـ CTA */
-            color: #fff;
-            padding: 100px 8% 40px;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .footer-top {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr 1fr;
-            gap: 50px;
-            padding-bottom: 70px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .footer-brand-info h2 {
-            font-family: 'Cinzel', serif;
-            font-size: 32px;
-            letter-spacing: 5px;
-            margin-bottom: 20px;
-            color: #fff;
-        }
-
-        .footer-brand-info p {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 14px;
-            line-height: 1.8;
-            max-width: 300px;
-        }
-
-        .footer-col h4 {
-            font-family: 'Cinzel', serif;
-            font-size: 15px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 30px;
-            color: #fff;
-        }
-
+        .brand-footer { background: #111; color: #fff; padding: 80px 8% 30px; }
+        .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 50px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .footer-brand-info h2 { font-family: 'Cinzel', serif; font-size: 28px; letter-spacing: 4px; margin-bottom: 15px; color: #fff; }
+        .footer-brand-info p { color: rgba(255, 255, 255, 0.6); font-size: 14px; max-width: 300px; }
+        .footer-col h4 { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 25px; color: #fff; }
         .footer-col ul { list-style: none; padding: 0; margin: 0; }
-        .footer-col ul li { margin-bottom: 15px; }
-        .footer-col ul li a {
-            color: rgba(255, 255, 255, 0.6);
-            text-decoration: none;
-            font-size: 14px;
-            transition: 0.3s;
-        }
-        .footer-col ul li a:hover { color: #fff; padding-left: 5px; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { color: rgba(255, 255, 255, 0.6); text-decoration: none; font-size: 14px; transition: 0.3s; }
+        .footer-col ul li a:hover { color: #fff; }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 30px; flex-wrap: wrap; gap: 20px; }
+        .social-icons a { color: rgba(255, 255, 255, 0.6); margin-right: 15px; font-size: 18px; transition: 0.3s; }
+        .social-icons a:hover { color: #fff; }
+        .copyright { font-size: 13px; color: rgba(255, 255, 255, 0.5); }
 
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 40px;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .social-icons a {
-            color: rgba(255, 255, 255, 0.6);
-            margin-right: 20px;
-            font-size: 20px;
-            transition: 0.3s;
-        }
-        .social-icons a:hover { color: #fff; transform: translateY(-3px); display: inline-block; }
-
-        .copyright { font-size: 13px; color: rgba(255, 255, 255, 0.5); letter-spacing: 1px; }
-
-        /* --- زر الدردشة الزجاجي (حجم صغير وأنيق) --- */
+        /* --- زر الدردشة الزجاجي المنيمل --- */
         #chat-widget { position: fixed; bottom: 25px; right: 25px; z-index: 2000; }
-        
         #chat-btn { 
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 6px 20px 0 rgba(2, 128, 144, 0.15);
-            color: var(--text-main);
-            font-family: 'Cinzel', serif;
-            font-weight: 700;
-            font-size: 13px;
-            letter-spacing: 2px;
-            padding: 10px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: 0.4s ease;
+            background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px);
+            border: 1px solid #ddd; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            color: var(--text-main); font-family: 'Cinzel', serif; font-weight: 700;
+            font-size: 12px; letter-spacing: 1px; padding: 10px 20px;
+            border-radius: 20px; cursor: pointer; transition: 0.3s;
         }
-        #chat-btn:hover { 
-            background: rgba(255, 255, 255, 0.8);
-            transform: translateY(-3px); 
-            box-shadow: 0 8px 25px 0 rgba(2, 128, 144, 0.25);
-        }
+        #chat-btn:hover { background: #fff; transform: translateY(-3px); }
 
-        #chat-win { 
-            display: none; width: 350px; height: 500px; background: #fff; 
-            border: 1px solid #eee; border-radius: 24px; position: absolute; 
-            bottom: 60px; right: 0; flex-direction: column; overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-        }
-        .chat-head { 
-            background: #fff; padding: 20px; border-bottom: 1px solid #eee; 
-            color: var(--text-main); font-weight: 700; display: flex; justify-content: space-between; 
-            align-items: center;
-        }
-        #chat-msgs { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background: #fafafa; }
-        .bot-msg { background: #fff; color: var(--text-main); padding: 12px 16px; border-radius: 12px; align-self: flex-start; border: 1px solid #eee; font-size: 14px; }
-        .user-msg { background: var(--ocean-blend); color: #fff; padding: 12px 16px; border-radius: 12px; align-self: flex-end; font-size: 14px; font-weight: 500; }
-        .chat-input-area { padding: 15px; background: #fff; border-top: 1px solid #eee; display: flex; gap: 10px; }
-        #chat-input { flex: 1; border: 1px solid #eee; padding: 12px; border-radius: 12px; outline: none; background: #f9f9f9; }
-
+        /* Media Queries */
         @media (max-width: 768px) {
-            .nav-top { flex-direction: column; gap: 15px; }
-            .search-box { width: 100%; margin: 0; }
-            .nav-links { justify-content: center; flex-wrap: wrap; padding-top: 10px; }
-            .hero-title { font-size: 2.5rem; }
-            .hero-glass { padding: 40px 20px; }
-            .cta-content h2 { font-size: 2rem; }
+            .nav-bottom { flex-direction: column; gap: 15px; }
+            .nav-links { flex-wrap: wrap; justify-content: center; }
             .footer-top { grid-template-columns: 1fr; text-align: center; }
-            .footer-brand-info p { max-width: 100%; margin: 0 auto; }
+            .footer-brand-info p { margin: 0 auto; }
         }
     </style>
 </head>
@@ -482,78 +347,121 @@
     <nav>
         <div class="nav-top">
             <a href="#" class="logo">ILYOM</a>
-            
             <div class="search-box">
-                <input type="text" id="live-search" placeholder="Search services (e.g. Hosting, AI, Web)..." autocomplete="off">
+                <input type="text" placeholder="Search services (e.g. Hosting, AI)...">
                 <i class="fas fa-search"></i>
-                <div class="search-results" id="search-results"></div>
             </div>
         </div>
 
-        <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#services">Services</a>
-            <a href="#">About Us</a>
-            <a href="#">Contact Us</a>
-            <a href="#">Support</a>
+        <div class="nav-bottom">
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#services">Services</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#">About Us</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="nav-auth">
+                <a href="#"><i class="far fa-user"></i> Account</a>
+                <a href="#" class="sign-up-btn">Sign Up</a>
+            </div>
         </div>
     </nav>
 
     <section class="hero">
         <div class="hero-glass">
-            <h1 class="hero-title">ILYOM Your <br><span style="background: var(--ocean-blend); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Digital Future.</span></h1>
-            <p class="hero-subtitle">Innovative AI Integration, Seamless Appwrite Architecture, and High-Performance Software Development.</p>
+            <h1 class="hero-title">ILYOM Your <br><span style="color: #028090;">Digital Future.</span></h1>
+            <p class="hero-subtitle">Streamlined IT Infrastructure, Seamless Cloud Architecture, and High-Performance Development tailored for simplicity and scale.</p>
         </div>
     </section>
 
     <div class="section-header" id="services">
         <h2>Expert Solutions</h2>
+        <p>Clean, powerful, and built for your business</p>
     </div>
 
     <div class="services-container">
         <section class="services-grid">
             
-            <div class="service-card">
-                <div class="service-visual">
-                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80" alt="Cloud Infrastructure">
-                </div>
-                <div class="service-content">
-                    <h3>Cloud Infrastructure & Hosting</h3>
-                    <p>Secure, scalable, and ultra-fast hosting environments built on enterprise-grade architecture for maximum reliability and uptime.</p>
-                    <a href="#" class="btn-brand">Discover More <i class="fas fa-arrow-right"></i></a>
-                </div>
+            <div class="service-card-clean">
+                <div class="service-icon-box"><i class="fas fa-cloud"></i></div>
+                <h3>Cloud Hosting</h3>
+                <p>Enterprise-grade servers with 99.99% uptime. Designed for speed, security, and absolute reliability.</p>
             </div>
 
-            <div class="service-card">
-                <div class="service-visual">
-                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=600&q=80" alt="AI Agents">
-                </div>
-                <div class="service-content">
-                    <h3>AI Customers & Agents</h3>
-                    <p>Intelligent AI agents tailored to your business needs, automating your sales, operations, and customer support 24/7.</p>
-                    <a href="#" class="btn-brand">Discover More <i class="fas fa-arrow-right"></i></a>
-                </div>
+            <div class="service-card-clean">
+                <div class="service-icon-box"><i class="fas fa-robot"></i></div>
+                <h3>AI Automation</h3>
+                <p>Smart, responsive AI agents that handle your customer support and automate repetitive operational tasks.</p>
             </div>
 
-            <div class="service-card">
-                <div class="service-visual">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="Web & App Development">
-                </div>
-                <div class="service-content">
-                    <h3>Custom Web & App Dev</h3>
-                    <p>Modern, responsive, and cross-platform applications built with cutting-edge tech stacks for high-conversion brands.</p>
-                    <a href="#" class="btn-brand">Discover More <i class="fas fa-arrow-right"></i></a>
-                </div>
+            <div class="service-card-clean">
+                <div class="service-icon-box"><i class="fas fa-code"></i></div>
+                <h3>Web Development</h3>
+                <p>Minimalist, high-converting digital storefronts and applications built with modern frameworks.</p>
             </div>
 
         </section>
     </div>
 
+    <section class="pricing-section" id="pricing">
+        <div class="section-header" style="padding-top: 0;">
+            <h2>Simple Pricing</h2>
+            <p>Choose the plan that fits your digital growth</p>
+        </div>
+
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Starter</h3>
+                <div class="price">$49<span>/mo</span></div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> Basic Cloud Hosting</li>
+                    <li><i class="fas fa-check"></i> 5GB Storage</li>
+                    <li><i class="fas fa-check"></i> Standard Support</li>
+                </ul>
+                <button class="btn-pay">Subscribe Now</button>
+            </div>
+
+            <div class="pricing-card popular">
+                <h3>Pro Business</h3>
+                <div class="price">$129<span>/mo</span></div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> Premium Cloud Hosting</li>
+                    <li><i class="fas fa-check"></i> 1 Basic AI Agent</li>
+                    <li><i class="fas fa-check"></i> 50GB Storage</li>
+                    <li><i class="fas fa-check"></i> 24/7 Priority Support</li>
+                </ul>
+                <button class="btn-pay">Subscribe Now</button>
+            </div>
+
+            <div class="pricing-card">
+                <h3>Enterprise</h3>
+                <div class="price">Custom</div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> Dedicated Server Architecture</li>
+                    <li><i class="fas fa-check"></i> Advanced AI Integration</li>
+                    <li><i class="fas fa-check"></i> Custom Web Development</li>
+                </ul>
+                <button class="btn-pay" style="background: #333;">Contact Sales</button>
+            </div>
+        </div>
+
+        <div class="payment-methods">
+            <p>Guaranteed Safe & Secure Checkout</p>
+            <div class="payment-icons">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-stripe"></i>
+                <i class="fab fa-cc-paypal"></i>
+            </div>
+        </div>
+    </section>
+
     <section class="cta-section">
         <div class="cta-content">
-            <h2>Are You Ready To Build Your Next Big Thing?</h2>
-            <p>Join the digital revolution with ILYOM's cutting-edge infrastructure and custom AI solutions.</p>
-            <a href="#" class="btn-cta">Get Started <i class="fas fa-arrow-right"></i></a>
+            <h2>Ready To Scale?</h2>
+            <p>Join the digital revolution with ILYOM's clean infrastructure.</p>
+            <a href="#pricing" class="btn-cta">Start Building <i class="fas fa-arrow-right"></i></a>
         </div>
     </section>
 
@@ -561,164 +469,43 @@
         <div class="footer-top">
             <div class="footer-brand-info">
                 <h2>ILYOM</h2>
-                <p>Delivering enterprise-grade digital infrastructure. We build, host, and scale your solutions with precision and uncompromising quality.</p>
+                <p>Minimalist, high-performance digital infrastructure for modern businesses.</p>
             </div>
-
+            <div class="footer-col">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#pricing">Pricing & Payments</a></li>
+                    <li><a href="#">Account</a></li>
+                </ul>
+            </div>
             <div class="footer-col">
                 <h4>Company</h4>
                 <ul>
-                    <li><a href="#">About ILYOM</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Case Studies</a></li>
-                    <li><a href="#">Contact Support</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
                 </ul>
             </div>
-
-            <div class="footer-col">
-                <h4>Services</h4>
-                <ul>
-                    <li><a href="#services">Cloud Infrastructure</a></li>
-                    <li><a href="#services">AI Automation</a></li>
-                    <li><a href="#services">Custom Development</a></li>
-                </ul>
-            </div>
-
             <div class="footer-col">
                 <h4>Legal</h4>
                 <ul>
                     <li><a href="#">Privacy Policy</a></li>
                     <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Cookie Policy</a></li>
                 </ul>
             </div>
         </div>
-
         <div class="footer-bottom">
             <div class="social-icons">
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
                 <a href="#"><i class="fab fa-x-twitter"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
             </div>
-
-            <div class="copyright">
-                &copy; 2026 ILYOM INFRASTRUCTURE. ALL RIGHTS RESERVED.
-            </div>
+            <div class="copyright">&copy; 2026 ILYOM. ALL RIGHTS RESERVED.</div>
         </div>
     </footer>
 
     <div id="chat-widget">
-        <button id="chat-btn" onclick="toggleChat()">
-            ILYOM
-        </button>
-        
-        <div id="chat-win">
-            <div class="chat-head">
-                <span>ILYOM Assistant</span>
-                <button onclick="toggleChat()" style="background:none; border:none; color:#999; cursor:pointer; font-size: 18px;"><i class="fas fa-times"></i></button>
-            </div>
-            <div id="chat-msgs">
-                <div class="bot-msg">Welcome to ILYOM. How can we help develop your digital infrastructure today?</div>
-            </div>
-            <div class="chat-input-area">
-                <input type="text" id="chat-input" placeholder="Type your inquiry...">
-                <button onclick="sendMsg()" style="background:var(--ocean-blend); border:none; padding:10px 15px; border-radius:10px; color:#fff; cursor:pointer; font-weight:bold;"><i class="fas fa-paper-plane"></i></button>
-            </div>
-        </div>
+        <button id="chat-btn">ILYOM CHAT</button>
     </div>
 
-    <script>
-        // --- برمجة خانة البحث المحدثة ---
-        const servicesData = [
-            { title: "Cloud Infrastructure & Hosting", icon: "fa-server" },
-            { title: "AI Customers & Agents", icon: "fa-robot" },
-            { title: "Custom Web & App Dev", icon: "fa-laptop-code" }
-        ];
-
-        const searchInput = document.getElementById('live-search');
-        const searchResults = document.getElementById('search-results');
-
-        searchInput.addEventListener('input', function() {
-            const query = this.value.toLowerCase();
-            searchResults.innerHTML = '';
-            
-            if (query.length > 0) {
-                const filtered = servicesData.filter(item => item.title.toLowerCase().includes(query));
-                
-                if (filtered.length > 0) {
-                    filtered.forEach(item => {
-                        const div = document.createElement('div');
-                        div.className = 'search-item';
-                        div.innerHTML = `<i class="fas ${item.icon}"></i> ${item.title}`;
-                        div.onclick = () => {
-                            window.location.href = "#services"; 
-                            searchInput.value = item.title;
-                            searchResults.style.display = 'none';
-                        };
-                        searchResults.appendChild(div);
-                    });
-                    searchResults.style.display = 'block';
-                } else {
-                    searchResults.innerHTML = `<div class="search-item" style="color:#888;">No services found.</div>`;
-                    searchResults.style.display = 'block';
-                }
-            } else {
-                searchResults.style.display = 'none';
-            }
-        });
-
-        document.addEventListener('click', function(e) {
-            if (!document.querySelector('.search-box').contains(e.target)) {
-                searchResults.style.display = 'none';
-            }
-        });
-
-        // --- برمجة الدردشة ---
-        function toggleChat() { 
-            const win = document.getElementById('chat-win'); 
-            win.style.display = win.style.display === 'none' ? 'flex' : 'none'; 
-        }
-        
-        async function sendMsg() {
-            const input = document.getElementById('chat-input');
-            const msgs = document.getElementById('chat-msgs');
-            if(!input.value) return;
-            
-            const text = input.value;
-            msgs.innerHTML += `<div class="user-msg">${text}</div>`;
-            input.value = '';
-            msgs.scrollTop = msgs.scrollHeight;
-
-            const typingIndicator = document.createElement('div');
-            typingIndicator.className = 'bot-msg';
-            typingIndicator.innerText = "...";
-            msgs.appendChild(typingIndicator);
-
-            try {
-                const res = await fetch('/api/chat', { 
-                    method: 'POST', 
-                    headers: { 'Content-Type': 'application/json' }, 
-                    body: JSON.stringify({ message: text }) 
-                });
-
-                const data = await res.json();
-                typingIndicator.remove(); 
-
-                if (data.reply) {
-                    msgs.innerHTML += `<div class="bot-msg">${data.reply}</div>`;
-                } else {
-                    msgs.innerHTML += `<div class="bot-msg" style="color:red;">خطأ في استلام الرد.</div>`;
-                }
-            } catch (e) {
-                typingIndicator.remove();
-                msgs.innerHTML += `<div class="bot-msg" style="color:red;">فشل الاتصال بالمساعد.</div>`;
-            }
-            msgs.scrollTop = msgs.scrollHeight;
-        }
-
-        document.getElementById('chat-input').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendMsg();
-        });
-    </script>
 </body>
 </html>
