@@ -281,13 +281,16 @@
             border-color: transparent;
         }
 
-        /* --- قسم الدعوة لاتخاذ إجراء (Call to Action) --- */
+        /* --- قسم الدعوة لاتخاذ إجراء (Call to Action) - تم تحديث الخلفية بالصورة الثانية --- */
         .cta-section {
-            background: var(--ocean-blend);
+            /* استبدال الخلفية بصورة Unsplash المقدمة لتكون الخلفية الجديدة */
+            background: url('https://images.unsplash.com/photo-1549692520-acc6669e2f0c?q=80&w=600&auto=format&fit=crop') center center / cover no-repeat;
             padding: 80px 20px;
             text-align: center;
             position: relative;
             overflow: hidden;
+            /* الحفاظ على لون النص الأبيض لضمان التباين مع الصورة الداكنة */
+            color: #fff;
         }
         
         .cta-content {
@@ -334,7 +337,8 @@
             background: #f4fcff;
         }
         
-        /* تأثيرات خلفية قسم الـ CTA */
+        /* تأثيرات خلفية قسم الـ CTA (تمت إزالتها للسماح بظهور الصورة بوضوح) */
+        /*
         .cta-section::after {
             content: '';
             position: absolute;
@@ -348,6 +352,7 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        */
 
         /* --- الفوتر --- */
         .brand-footer {
