@@ -15,7 +15,8 @@
             --text-main: #1d1d1f;
             --text-secondary: #86868b;
             --accent-cyan: #00d2ff;
-            --deep-black: #0b0b0b;
+            /* اللون الجديد الفاخر: أزرق يندمج مع الأخضر */
+            --ocean-blend: linear-gradient(135deg, #00324e 0%, #005a46 100%);
         }
 
         body {
@@ -27,18 +28,17 @@
             scroll-behavior: smooth;
         }
 
-        /* --- الهيدر الجديد --- */
+        /* --- الهيدر الجديد باللون الأزرق المندمج بالأخضر --- */
         nav {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(15px);
+            background: var(--ocean-blend);
             padding: 15px 8%;
             display: flex;
             flex-direction: column;
             gap: 15px;
-            border-bottom: 1px solid #eeeeee;
             position: sticky; 
             top: 0; 
             z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
 
         .nav-top {
@@ -59,7 +59,7 @@
             text-decoration: none;
         }
 
-        /* خانة البحث الطويلة */
+        /* خانة البحث الزجاجية لتناسب الخلفية الداكنة */
         .search-box {
             position: relative;
             width: 60%;
@@ -68,26 +68,31 @@
         .search-box input {
             width: 100%;
             padding: 14px 45px 14px 25px;
-            border: 1px solid #e0e0e0;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
             border-radius: 30px;
             font-size: 14px;
             outline: none;
-            background: #f9f9f9;
             font-family: 'Inter', sans-serif;
             transition: 0.3s;
             box-sizing: border-box;
+            backdrop-filter: blur(5px);
+        }
+        .search-box input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
         }
         .search-box input:focus {
+            background: rgba(255, 255, 255, 0.15);
             border-color: var(--accent-cyan);
-            background: #fff;
-            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.2);
         }
         .search-box i {
             position: absolute;
             right: 20px;
             top: 50%;
             transform: translateY(-50%);
-            color: #aaa;
+            color: rgba(255, 255, 255, 0.7);
             transition: 0.3s;
         }
         .search-box input:focus + i { color: var(--accent-cyan); }
@@ -115,6 +120,7 @@
             align-items: center;
             gap: 12px;
             transition: 0.2s;
+            color: var(--text-main);
         }
         .search-item i { position: static; transform: none; color: var(--accent-cyan); font-size: 14px; }
         .search-item:hover { background: #f4fcff; padding-left: 25px; }
@@ -124,12 +130,12 @@
             gap: 35px;
             width: 100%;
             justify-content: flex-start;
-            border-top: 1px solid #f0f0f0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding-top: 15px;
         }
 
         .nav-links a { 
-            color: var(--text-main); 
+            color: rgba(255, 255, 255, 0.85); 
             text-decoration: none; 
             font-size: 13px; 
             font-weight: 600;
@@ -137,7 +143,7 @@
             letter-spacing: 1px;
             transition: 0.3s; 
         }
-        .nav-links a:hover { color: var(--accent-cyan); }
+        .nav-links a:hover { color: #fff; text-shadow: 0 0 8px rgba(255,255,255,0.5); }
 
         /* --- واجهة العالم الرقمي (Hero Section) --- */
         .hero { 
@@ -209,9 +215,9 @@
         .service-box h3 { margin: 10px 0; color: var(--text-main); font-size: 1.5rem; }
         .service-box p { color: var(--text-secondary); font-size: 15px; }
 
-        /* --- الفوتر الفاخر --- */
+        /* --- الفوتر الجديد باللون الأزرق والأخضر --- */
         .brand-footer {
-            background-color: var(--deep-black);
+            background: var(--ocean-blend);
             color: #fff;
             padding: 100px 8% 40px;
             margin-top: 60px;
@@ -223,7 +229,7 @@
             grid-template-columns: 1.5fr 1fr 1fr 1fr;
             gap: 50px;
             padding-bottom: 70px;
-            border-bottom: 1px solid #222;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .footer-brand-info h2 {
@@ -237,7 +243,7 @@
         }
 
         .footer-brand-info p {
-            color: #888;
+            color: rgba(255, 255, 255, 0.7);
             font-size: 14px;
             line-height: 1.8;
             max-width: 300px;
@@ -249,26 +255,26 @@
             letter-spacing: 3px;
             text-transform: uppercase;
             margin-bottom: 30px;
-            color: #fff;
+            color: var(--accent-cyan); /* تغيير لون العناوين لتبرز أكثر */
         }
 
         .footer-col ul { list-style: none; padding: 0; margin: 0; }
         .footer-col ul li { margin-bottom: 15px; }
         .footer-col ul li a {
-            color: #888;
+            color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
             font-size: 14px;
             transition: 0.3s;
         }
-        .footer-col ul li a:hover { color: var(--accent-cyan); padding-left: 5px; }
+        .footer-col ul li a:hover { color: #fff; padding-left: 5px; }
 
         .footer-newsletter {
             margin-top: 60px;
             padding: 50px;
-            background: #111;
+            background: rgba(0, 0, 0, 0.15); /* شفافية داكنة لتناسب الخلفية */
             border-radius: 16px;
             text-align: center;
-            border: 1px solid #222;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .footer-newsletter h3 {
@@ -288,18 +294,19 @@
         .newsletter-form input {
             flex: 1;
             padding: 15px 20px;
-            background: #1a1a1a;
-            border: 1px solid #333;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             color: #fff;
             outline: none;
             border-radius: 8px;
             font-family: 'Inter', sans-serif;
         }
+        .newsletter-form input::placeholder { color: rgba(255, 255, 255, 0.6); }
 
         .newsletter-form button {
             padding: 15px 30px;
             background: var(--primary-gradient);
-            color: var(--deep-black);
+            color: var(--text-main);
             border: none;
             cursor: pointer;
             font-weight: 700;
@@ -319,15 +326,15 @@
         }
 
         .social-icons a {
-            color: #888;
+            color: rgba(255, 255, 255, 0.7);
             margin-right: 20px;
             font-size: 20px;
             transition: 0.3s;
         }
         .social-icons a:hover { color: var(--accent-cyan); }
 
-        .payment-chips { display: flex; gap: 15px; font-size: 28px; color: #444; }
-        .copyright { font-size: 13px; color: #555; letter-spacing: 1px; }
+        .payment-chips { display: flex; gap: 15px; font-size: 28px; color: rgba(255, 255, 255, 0.5); }
+        .copyright { font-size: 13px; color: rgba(255, 255, 255, 0.5); letter-spacing: 1px; }
 
         /* --- زر الدردشة الزجاجي الفاخر --- */
         #chat-widget { position: fixed; bottom: 30px; right: 30px; z-index: 2000; }
@@ -484,7 +491,7 @@
 
         <div class="footer-newsletter">
             <h3>Stay Ahead of the Curve</h3>
-            <p style="color: #888; font-size: 14px; margin-bottom: 20px;">Subscribe to our newsletter for the latest insights in infrastructure and AI engineering.</p>
+            <p style="color: rgba(255, 255, 255, 0.7); font-size: 14px; margin-bottom: 20px;">Subscribe to our newsletter for the latest insights in infrastructure and AI engineering.</p>
             <div class="newsletter-form">
                 <input type="email" placeholder="Enter your business email">
                 <button>SUBSCRIBE</button>
