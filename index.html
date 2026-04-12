@@ -4,24 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ILYOM | Digital Infrastructure & Solutions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root {
-            --primary-gradient: linear-gradient(135deg, #00d2ff 0%, #00ff88 100%);
+            /* الألوان الجديدة المشرقة التي تنطلق يميناً */
+            --primary-gradient: linear-gradient(to right, #028090 0%, #00bf8f 100%);
             --white-bg: #ffffff;
-            --light-gray: #f9f9fb;
+            --light-gray: #f5f5f7;
             --text-main: #1d1d1f;
-            --text-secondary: #6e6e73;
-            --accent-cyan: #00d2ff;
-            /* اللون المشرق */
+            --text-secondary: #86868b;
+            --accent-cyan: #00bf8f;
+            /* اللون المفتوح يميل للأخضر وينطلق يميناً */
             --ocean-blend: linear-gradient(to right, #028090 0%, #00bf8f 100%);
-            --glass-green: rgba(0, 191, 143, 0.08);
         }
 
         body {
-            background-color: var(--light-gray);
+            background-color: var(--white-bg);
             color: var(--text-main);
             font-family: 'Inter', -apple-system, sans-serif;
             margin: 0;
@@ -29,7 +29,7 @@
             scroll-behavior: smooth;
         }
 
-        /* --- الهيدر المشرق --- */
+        /* --- الهيدر الجديد --- */
         nav {
             background: var(--ocean-blend);
             padding: 15px 8%;
@@ -39,7 +39,7 @@
             position: sticky; 
             top: 0; 
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
 
         .nav-top {
@@ -54,21 +54,23 @@
             font-size: 32px; 
             font-weight: 800; 
             letter-spacing: 4px;
-            color: #fff;
+            background: var(--primary-gradient); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
             text-decoration: none;
         }
 
-        /* خانة البحث الزجاجية */
+        /* خانة البحث الزجاجية لتناسب الخلفية الداكنة */
         .search-box {
             position: relative;
             width: 60%;
-            max-width: 600px;
+            max-width: 700px;
         }
         .search-box input {
             width: 100%;
-            padding: 12px 45px 12px 25px;
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 14px 45px 14px 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             color: #fff;
             border-radius: 30px;
             font-size: 14px;
@@ -76,94 +78,95 @@
             font-family: 'Inter', sans-serif;
             transition: 0.3s;
             box-sizing: border-box;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(5px);
         }
-        .search-box input::placeholder { color: rgba(255, 255, 255, 0.8); }
+        .search-box input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
         .search-box input:focus {
-            background: rgba(255, 255, 255, 0.25);
-            border-color: #fff;
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.2);
         }
         .search-box i {
             position: absolute;
             right: 20px;
             top: 50%;
             transform: translateY(-50%);
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.7);
+            transition: 0.3s;
         }
+        .search-box input:focus + i { color: var(--accent-cyan); }
 
-        /* القائمة السفلية (روابط التصفح + الحساب يميناً) */
-        .nav-bottom {
-            display: flex;
-            justify-content: space-between; /* تفصل بين القائمة الرئيسية والحساب */
-            align-items: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            padding-top: 15px;
+        /* نتائج البحث المنسدلة */
+        .search-results {
+            display: none;
+            position: absolute;
+            top: 110%;
+            left: 0;
             width: 100%;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid #eee;
+            overflow: hidden;
+            z-index: 1001;
         }
+        .search-item {
+            padding: 15px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            border-bottom: 1px solid #fafafa;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.2s;
+            color: var(--text-main);
+        }
+        .search-item i { position: static; transform: none; color: var(--accent-cyan); font-size: 14px; }
+        .search-item:hover { background: #f4fcff; padding-left: 25px; }
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 35px;
+            width: 100%;
+            justify-content: flex-start;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 15px;
         }
 
-        /* خط بسيط ومتناسق مع المتجر */
         .nav-links a { 
-            color: rgba(255, 255, 255, 0.9); 
+            color: rgba(255, 255, 255, 0.85); 
             text-decoration: none; 
-            font-size: 15px; 
-            font-weight: 400; /* إزالة الخط العريض ليكون أبسط */
+            font-size: 13px; 
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             transition: 0.3s; 
         }
-        .nav-links a:hover { color: #fff; }
+        .nav-links a:hover { color: #fff; text-shadow: 0 0 8px rgba(255,255,255,0.5); }
 
-        .nav-auth {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .nav-auth a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-
-        .nav-auth .sign-up-btn {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 8px 22px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            font-weight: 600;
-        }
-        .nav-auth .sign-up-btn:hover {
-            background: #fff;
-            color: #028090;
-        }
-
-        /* --- واجهة العالم الرقمي (البطل) --- */
+        /* --- واجهة العالم الرقمي (Hero Section) --- */
         .hero { 
             text-align: center; 
-            padding: 120px 20px;
-            background: var(--white-bg);
+            padding: 160px 20px;
+            position: relative;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
-            overflow: hidden;
         }
-
+        
         /* حركة العالم الرقمي (الشبكة المتحركة) */
         .hero::before {
             content: '';
             position: absolute;
             top: -50%; left: -50%; right: -50%; bottom: -50%;
             background-image: 
-                linear-gradient(rgba(2, 128, 144, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(2, 128, 144, 0.05) 1px, transparent 1px);
+                linear-gradient(rgba(0, 210, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 210, 255, 0.05) 1px, transparent 1px);
             background-size: 40px 40px;
-            z-index: 0;
+            z-index: -1;
             transform: perspective(500px) rotateX(60deg);
             animation: digitalPulse 15s linear infinite;
         }
@@ -172,28 +175,29 @@
             100% { transform: perspective(500px) rotateX(60deg) translateY(40px); }
         }
 
+        /* صندوق الزجاج الأخضر المفتوح */
         .hero-glass {
             position: relative;
             z-index: 1;
-            background: var(--glass-green);
+            background: rgba(0, 191, 143, 0.08); 
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(0, 191, 143, 0.2);
             border-radius: 24px;
-            padding: 60px 40px;
+            padding: 50px 40px;
             max-width: 800px;
-            box-shadow: 0 15px 35px rgba(2, 128, 144, 0.05);
+            box-shadow: 0 15px 35px rgba(2, 128, 144, 0.1);
         }
 
         .hero-title { 
-            font-size: 3.5rem; 
+            font-size: 4rem; 
             font-weight: 800; 
             color: var(--text-main);
             margin: 0; 
-            line-height: 1.2;
+            letter-spacing: -1px;
         }
         .hero-subtitle {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: var(--text-secondary);
             margin-top: 20px;
             max-width: 650px;
@@ -201,157 +205,207 @@
             margin-right: auto;
         }
 
-        /* --- قسم الخدمات النظيف والبسيط (بدون صور مشوشة) --- */
-        .section-header { text-align: center; padding: 80px 0 30px; background: var(--light-gray); }
-        .section-header h2 { font-size: 2.2rem; color: var(--text-main); margin: 0; }
-        .section-header p { color: var(--text-secondary); margin-top: 10px; font-size: 1.1rem; }
-
-        .services-container {
-            background: var(--light-gray);
-            padding: 0 8% 80px;
-        }
+        /* --- الخدمات --- */
+        .section-header { text-align: center; padding: 60px 0 20px; }
+        .section-header h2 { font-size: 2.5rem; color: var(--text-main); }
 
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
-            max-width: 1100px;
-            margin: 0 auto;
+            padding: 0 8% 80px;
         }
 
-        /* بطاقات الخدمات البسيطة والمريحة للعين */
-        .service-card-clean {
+        .service-box {
+            background: var(--light-gray);
+            border: 1px solid #e5e5e5;
+            border-radius: 24px;
+            padding: 40px;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .service-box:hover { 
             background: #fff;
-            border-radius: 16px;
-            padding: 40px 30px;
-            text-align: left;
-            border: 1px solid #eee;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            border-color: var(--accent-cyan);
+        }
+        .service-box i { font-size: 35px; color: var(--accent-cyan); margin-bottom: 25px; }
+        .service-box h3 { margin: 10px 0; color: var(--text-main); font-size: 1.5rem; }
+        .service-box p { color: var(--text-secondary); font-size: 15px; }
+
+        /* --- الفوتر الجديد باللون الأزرق والأخضر --- */
+        .brand-footer {
+            background: var(--ocean-blend);
+            color: #fff;
+            padding: 100px 8% 40px;
+            margin-top: 60px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 50px;
+            padding-bottom: 70px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-brand-info h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 32px;
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+        }
+
+        .footer-brand-info p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            line-height: 1.8;
+            max-width: 300px;
+        }
+
+        .footer-col h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 15px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            color: var(--accent-cyan);
+        }
+
+        .footer-col ul { list-style: none; padding: 0; margin: 0; }
+        .footer-col ul li { margin-bottom: 15px; }
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 14px;
             transition: 0.3s;
         }
-        .service-card-clean:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(2, 128, 144, 0.08);
-            border-color: rgba(2, 128, 144, 0.3);
+        .footer-col ul li a:hover { color: #fff; padding-left: 5px; }
+
+        .footer-newsletter {
+            margin-top: 60px;
+            padding: 50px;
+            background: rgba(0, 0, 0, 0.15); 
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .service-icon-box {
-            width: 60px;
-            height: 60px;
-            background: var(--glass-green);
-            color: #00bf8f;
-            border-radius: 14px;
+        .footer-newsletter h3 {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 25px auto 0;
+            gap: 10px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            outline: none;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+        }
+        .newsletter-form input::placeholder { color: rgba(255, 255, 255, 0.6); }
+
+        .newsletter-form button {
+            padding: 15px 30px;
+            background: var(--primary-gradient);
+            color: var(--text-main);
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            letter-spacing: 1px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .newsletter-form button:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .social-icons a {
+            color: rgba(255, 255, 255, 0.7);
+            margin-right: 20px;
+            font-size: 20px;
+            transition: 0.3s;
+        }
+        .social-icons a:hover { color: var(--accent-cyan); }
+
+        .payment-chips { display: flex; gap: 15px; font-size: 28px; color: rgba(255, 255, 255, 0.5); }
+        .copyright { font-size: 13px; color: rgba(255, 255, 255, 0.5); letter-spacing: 1px; }
+
+        /* --- زر الدردشة الزجاجي (محدث ومصغر وبدون أيقونة) --- */
+        #chat-widget { position: fixed; bottom: 30px; right: 30px; z-index: 2000; }
+        
+        #chat-btn { 
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(0, 210, 255, 0.2);
+            color: var(--text-main);
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 14px; /* تصغير حجم الخط */
+            letter-spacing: 2px;
+            padding: 10px 20px; /* تصغير أبعاد الزر */
+            border-radius: 30px;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            margin-bottom: 25px;
+            transition: 0.4s ease;
+        }
+        #chat-btn:hover { 
+            background: rgba(255, 255, 255, 0.6);
+            transform: translateY(-3px); 
         }
 
-        .service-card-clean h3 { margin: 0 0 15px; color: var(--text-main); font-size: 1.4rem; }
-        .service-card-clean p { color: var(--text-secondary); font-size: 14px; line-height: 1.6; margin-bottom: 0; }
-
-        /* --- قسم الدفع والاشتراكات المضاف --- */
-        .pricing-section {
-            background: #fff;
-            padding: 80px 8%;
-            text-align: center;
+        #chat-win { 
+            display: none; width: 350px; height: 500px; background: #fff; 
+            border: 1px solid #eee; border-radius: 24px; position: absolute; 
+            bottom: 65px; right: 0; flex-direction: column; overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
         }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1000px;
-            margin: 40px auto 0;
+        .chat-head { 
+            background: #fff; padding: 20px; border-bottom: 1px solid #eee; 
+            color: var(--text-main); font-weight: 700; display: flex; justify-content: space-between; 
+            align-items: center;
         }
+        #chat-msgs { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background: #fafafa; }
+        .bot-msg { background: #fff; color: var(--text-main); padding: 12px 16px; border-radius: 12px; align-self: flex-start; border: 1px solid #eee; font-size: 14px; }
+        .user-msg { background: var(--primary-gradient); color: #1d1d1f; padding: 12px 16px; border-radius: 12px; align-self: flex-end; font-size: 14px; font-weight: 500; }
+        .chat-input-area { padding: 15px; background: #fff; border-top: 1px solid #eee; display: flex; gap: 10px; }
+        #chat-input { flex: 1; border: 1px solid #eee; padding: 12px; border-radius: 12px; outline: none; background: #f9f9f9; }
 
-        .pricing-card {
-            border: 1px solid #eee;
-            border-radius: 20px;
-            padding: 40px 30px;
-            background: #fafafa;
-            transition: 0.3s;
-            position: relative;
-        }
-        .pricing-card.popular {
-            background: var(--glass-green);
-            border-color: rgba(0, 191, 143, 0.2);
-        }
-
-        .pricing-card h3 { font-size: 1.5rem; margin-bottom: 10px; color: var(--text-main); }
-        .price { font-size: 2.5rem; font-weight: 700; color: #028090; margin-bottom: 20px; }
-        .price span { font-size: 1rem; color: var(--text-secondary); font-weight: 400; }
-        
-        .pricing-features { list-style: none; padding: 0; margin: 0 0 30px; text-align: left; }
-        .pricing-features li { margin-bottom: 12px; font-size: 14px; color: var(--text-secondary); display: flex; align-items: center;}
-        .pricing-features li i { color: #00bf8f; margin-right: 10px; font-size: 12px;}
-
-        .btn-pay {
-            display: block;
-            width: 100%;
-            padding: 14px;
-            background: var(--ocean-blend);
-            color: #fff;
-            border: none;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            text-decoration: none;
-            box-sizing: border-box;
-        }
-        .btn-pay:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(2, 128, 144, 0.2); }
-
-        .payment-methods {
-            margin-top: 40px;
-            color: var(--text-secondary);
-            font-size: 14px;
-        }
-        .payment-icons {
-            margin-top: 15px;
-            font-size: 32px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            color: #b0b0b0;
-        }
-
-        /* --- الفوتر --- */
-        .brand-footer { background: #111; color: #fff; padding: 80px 8% 30px; margin-top: 0;}
-        .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 50px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-        .footer-brand-info h2 { font-family: 'Cinzel', serif; font-size: 28px; letter-spacing: 4px; margin-bottom: 15px; color: #fff; }
-        .footer-brand-info p { color: rgba(255, 255, 255, 0.6); font-size: 14px; line-height: 1.8; max-width: 300px; }
-        .footer-col h4 { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 25px; color: #fff; }
-        .footer-col ul { list-style: none; padding: 0; margin: 0; }
-        .footer-col ul li { margin-bottom: 12px; }
-        .footer-col ul li a { color: rgba(255, 255, 255, 0.6); text-decoration: none; font-size: 14px; transition: 0.3s; }
-        .footer-col ul li a:hover { color: #fff; }
-        .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 30px; flex-wrap: wrap; gap: 20px; }
-        .social-icons a { color: rgba(255, 255, 255, 0.6); margin-right: 15px; font-size: 18px; transition: 0.3s; }
-        .social-icons a:hover { color: #fff; }
-        .copyright { font-size: 13px; color: rgba(255, 255, 255, 0.5); }
-
-        /* --- زر الدردشة الزجاجي (بسيط جداً) --- */
-        #chat-widget { position: fixed; bottom: 25px; right: 25px; z-index: 2000; }
-        #chat-btn { 
-            background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px);
-            border: 1px solid #eee; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            color: var(--text-main); font-family: 'Cinzel', serif; font-weight: 700;
-            font-size: 12px; letter-spacing: 1px; padding: 12px 24px;
-            border-radius: 30px; cursor: pointer; transition: 0.3s;
-        }
-        #chat-btn:hover { background: #fff; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(2, 128, 144, 0.15); }
-
-        /* Media Queries للهواتف */
         @media (max-width: 768px) {
-            .nav-bottom { flex-direction: column; gap: 15px; }
-            .nav-links { flex-wrap: wrap; justify-content: center; gap: 15px;}
+            .nav-top { flex-direction: column; gap: 15px; }
             .search-box { width: 100%; margin: 0; }
+            .nav-links { justify-content: center; flex-wrap: wrap; padding-top: 10px; }
             .hero-title { font-size: 2.5rem; }
             .footer-top { grid-template-columns: 1fr; text-align: center; }
-            .footer-brand-info p { margin: 0 auto; }
+            .footer-brand-info p { max-width: 100%; margin: 0 auto; }
+            .newsletter-form { flex-direction: column; }
         }
     </style>
 </head>
@@ -360,114 +414,59 @@
     <nav>
         <div class="nav-top">
             <a href="#" class="logo">ILYOM</a>
+            
             <div class="search-box">
-                <input type="text" placeholder="Search services (e.g. Hosting, AI)...">
+                <input type="text" id="live-search" placeholder="Search services (e.g. Hosting, AI, Web)..." autocomplete="off">
                 <i class="fas fa-search"></i>
+                <div class="search-results" id="search-results"></div>
             </div>
         </div>
 
-        <div class="nav-bottom">
-            <div class="nav-links">
-                <a href="#">Home</a>
-                <a href="#services">Services</a>
-                <a href="#pricing">Pricing</a>
-                <a href="#">About Us</a>
-                <a href="#">Contact</a>
-            </div>
-            <div class="nav-auth">
-                <a href="#"><i class="far fa-user"></i> Account</a>
-                <a href="#" class="sign-up-btn">Sign Up</a>
-            </div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#services">Services</a>
+            <a href="#">About Us</a>
+            <a href="#">Contact Us</a>
+            <a href="#">Support</a>
         </div>
     </nav>
 
     <section class="hero">
         <div class="hero-glass">
-            <h1 class="hero-title">ILYOM Your <br><span style="color: #028090;">Digital Future.</span></h1>
-            <p class="hero-subtitle">Streamlined IT Infrastructure, Seamless Cloud Architecture, and High-Performance Development tailored for simplicity and scale.</p>
+            <h1 class="hero-title">ILYOM Your <span style="background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Digital Future.</span></h1>
+            <p class="hero-subtitle">Innovative AI Integration, Seamless Appwrite Architecture, and High-Performance Software Development.</p>
         </div>
     </section>
 
     <div class="section-header" id="services">
         <h2>Expert Solutions</h2>
-        <p>Clean, powerful, and built for your business</p>
     </div>
 
-    <div class="services-container">
-        <section class="services-grid">
-            
-            <div class="service-card-clean">
-                <div class="service-icon-box"><i class="fas fa-cloud"></i></div>
-                <h3>Cloud Hosting</h3>
-                <p>Enterprise-grade servers with 99.99% uptime. Designed for speed, security, and absolute reliability.</p>
-            </div>
-
-            <div class="service-card-clean">
-                <div class="service-icon-box"><i class="fas fa-robot"></i></div>
-                <h3>AI Automation</h3>
-                <p>Smart, responsive AI agents that handle your customer support and automate repetitive operational tasks.</p>
-            </div>
-
-            <div class="service-card-clean">
-                <div class="service-icon-box"><i class="fas fa-code"></i></div>
-                <h3>Web Development</h3>
-                <p>Minimalist, high-converting digital storefronts and applications built with modern frameworks.</p>
-            </div>
-
-        </section>
-    </div>
-
-    <section class="pricing-section" id="pricing">
-        <div class="section-header" style="padding-top: 0; background: transparent;">
-            <h2>Simple Pricing</h2>
-            <p>Choose the plan that fits your digital growth</p>
+    <section class="services-grid">
+        <div class="service-box">
+            <i class="fas fa-server"></i>
+            <h3>High-Performance Hosting</h3>
+            <p>We deploy your apps on enterprise-grade infrastructure with 99.9% uptime.</p>
         </div>
-
-        <div class="pricing-grid">
-            <div class="pricing-card">
-                <h3>Starter</h3>
-                <div class="price">$49<span>/mo</span></div>
-                <ul class="pricing-features">
-                    <li><i class="fas fa-check"></i> Basic Cloud Hosting</li>
-                    <li><i class="fas fa-check"></i> 5GB Storage</li>
-                    <li><i class="fas fa-check"></i> Standard Support</li>
-                </ul>
-                <a href="#" class="btn-pay">Select Plan</a>
-            </div>
-
-            <div class="pricing-card popular">
-                <h3>Pro Business</h3>
-                <div class="price">$129<span>/mo</span></div>
-                <ul class="pricing-features">
-                    <li><i class="fas fa-check"></i> Premium Cloud Hosting</li>
-                    <li><i class="fas fa-check"></i> 1 Dedicated AI Agent</li>
-                    <li><i class="fas fa-check"></i> 50GB Storage</li>
-                    <li><i class="fas fa-check"></i> 24/7 Priority Support</li>
-                </ul>
-                <a href="#" class="btn-pay">Select Plan</a>
-            </div>
-
-            <div class="pricing-card">
-                <h3>Enterprise</h3>
-                <div class="price">Custom</div>
-                <ul class="pricing-features">
-                    <li><i class="fas fa-check"></i> Dedicated Server Architecture</li>
-                    <li><i class="fas fa-check"></i> Advanced AI Integration</li>
-                    <li><i class="fas fa-check"></i> Custom Web Development</li>
-                </ul>
-                <a href="#" class="btn-pay" style="background: #111;">Contact Sales</a>
-            </div>
+        <div class="service-box">
+            <i class="fas fa-robot"></i>
+            <h3>AI Customers & Agents</h3>
+            <p>Intelligent AI agents that automate your sales and customer support 24/7.</p>
         </div>
-
-        <div class="payment-methods">
-            <p>Guaranteed Safe & Secure Checkout</p>
-            <div class="payment-icons">
-                <i class="fab fa-cc-visa"></i>
-                <i class="fab fa-cc-mastercard"></i>
-                <i class="fab fa-cc-stripe"></i>
-                <i class="fab fa-cc-paypal"></i>
-                <i class="fab fa-cc-apple-pay"></i>
-            </div>
+        <div class="service-box">
+            <i class="fas fa-database"></i>
+            <h3>Appwrite Integration</h3>
+            <p>Seamless backend infrastructure to keep your data secure and accessible.</p>
+        </div>
+        <div class="service-box">
+            <i class="fas fa-laptop-code"></i>
+            <h3>Web Creation</h3>
+            <p>Modern, responsive, and SEO-optimized websites for high-conversion brands.</p>
+        </div>
+        <div class="service-box">
+            <i class="fas fa-mobile-alt"></i>
+            <h3>App Development</h3>
+            <p>Cross-platform mobile and desktop apps built with modern tech stacks.</p>
         </div>
     </section>
 
@@ -475,43 +474,184 @@
         <div class="footer-top">
             <div class="footer-brand-info">
                 <h2>ILYOM</h2>
-                <p>Minimalist, high-performance digital infrastructure for modern businesses. We scale with you.</p>
+                <p>Delivering enterprise-grade digital infrastructure. We build, host, and scale your solutions with precision and uncompromising quality.</p>
             </div>
-            <div class="footer-col">
-                <h4>Platform</h4>
-                <ul>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#pricing">Pricing & Payments</a></li>
-                    <li><a href="#">Account</a></li>
-                </ul>
-            </div>
+
             <div class="footer-col">
                 <h4>Company</h4>
                 <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">About ILYOM</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Case Studies</a></li>
+                    <li><a href="#">Contact Support</a></li>
                 </ul>
             </div>
+
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#services">Premium Hosting</a></li>
+                    <li><a href="#services">AI Automation</a></li>
+                    <li><a href="#services">Appwrite Backend</a></li>
+                    <li><a href="#services">Web & App Dev</a></li>
+                </ul>
+            </div>
+
             <div class="footer-col">
                 <h4>Legal</h4>
                 <ul>
                     <li><a href="#">Privacy Policy</a></li>
                     <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                    <li><a href="#">Security Guidelines</a></li>
                 </ul>
             </div>
         </div>
+
+        <div class="footer-newsletter">
+            <h3>Stay Ahead of the Curve</h3>
+            <p style="color: rgba(255, 255, 255, 0.7); font-size: 14px; margin-bottom: 20px;">Subscribe to our newsletter for the latest insights in infrastructure and AI engineering.</p>
+            <div class="newsletter-form">
+                <input type="email" placeholder="Enter your business email">
+                <button>SUBSCRIBE</button>
+            </div>
+        </div>
+
         <div class="footer-bottom">
             <div class="social-icons">
-                <a href="#"><i class="fab fa-x-twitter"></i></a>
                 <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-x-twitter"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
             </div>
-            <div class="copyright">&copy; 2026 ILYOM. ALL RIGHTS RESERVED.</div>
+
+            <div class="payment-chips">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-stripe"></i>
+                <i class="fab fa-aws" style="font-size: 26px;"></i>
+            </div>
+
+            <div class="copyright">
+                &copy; 2026 ILYOM INFRASTRUCTURE. ALL RIGHTS RESERVED.
+            </div>
         </div>
     </footer>
 
     <div id="chat-widget">
-        <button id="chat-btn">ILYOM</button>
+        <button id="chat-btn" onclick="toggleChat()">
+            ILYOM
+        </button>
+        
+        <div id="chat-win">
+            <div class="chat-head">
+                <span>ILYOM Assistant</span>
+                <button onclick="toggleChat()" style="background:none; border:none; color:#999; cursor:pointer; font-size: 18px;"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="chat-msgs">
+                <div class="bot-msg">Welcome to ILYOM. How can we help develop your digital infrastructure today?</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Type your inquiry...">
+                <button onclick="sendMsg()" style="background:var(--primary-gradient); border:none; padding:10px 15px; border-radius:10px; color:#1d1d1f; cursor:pointer; font-weight:bold;"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
     </div>
 
+    <script>
+        // --- 1. برمجة خانة البحث ---
+        const servicesData = [
+            { title: "High-Performance Hosting", icon: "fa-server" },
+            { title: "AI Customers & Agents", icon: "fa-robot" },
+            { title: "Appwrite Integration", icon: "fa-database" },
+            { title: "Web Creation", icon: "fa-laptop-code" },
+            { title: "App Development", icon: "fa-mobile-alt" }
+        ];
+
+        const searchInput = document.getElementById('live-search');
+        const searchResults = document.getElementById('search-results');
+
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            searchResults.innerHTML = '';
+            
+            if (query.length > 0) {
+                const filtered = servicesData.filter(item => item.title.toLowerCase().includes(query));
+                
+                if (filtered.length > 0) {
+                    filtered.forEach(item => {
+                        const div = document.createElement('div');
+                        div.className = 'search-item';
+                        div.innerHTML = `<i class="fas ${item.icon}"></i> ${item.title}`;
+                        div.onclick = () => {
+                            window.location.href = "#services"; 
+                            searchInput.value = item.title;
+                            searchResults.style.display = 'none';
+                        };
+                        searchResults.appendChild(div);
+                    });
+                    searchResults.style.display = 'block';
+                } else {
+                    searchResults.innerHTML = `<div class="search-item" style="color:#888;">No services found.</div>`;
+                    searchResults.style.display = 'block';
+                }
+            } else {
+                searchResults.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!document.querySelector('.search-box').contains(e.target)) {
+                searchResults.style.display = 'none';
+            }
+        });
+
+        // --- 2. برمجة الدردشة ---
+        function toggleChat() { 
+            const win = document.getElementById('chat-win'); 
+            win.style.display = win.style.display === 'none' ? 'flex' : 'none'; 
+        }
+        
+        async function sendMsg() {
+            const input = document.getElementById('chat-input');
+            const msgs = document.getElementById('chat-msgs');
+            if(!input.value) return;
+            
+            const text = input.value;
+            msgs.innerHTML += `<div class="user-msg">${text}</div>`;
+            input.value = '';
+            msgs.scrollTop = msgs.scrollHeight;
+
+            const typingIndicator = document.createElement('div');
+            typingIndicator.className = 'bot-msg';
+            typingIndicator.innerText = "...";
+            msgs.appendChild(typingIndicator);
+
+            try {
+                const res = await fetch('/api/chat', { 
+                    method: 'POST', 
+                    headers: { 'Content-Type': 'application/json' }, 
+                    body: JSON.stringify({ message: text }) 
+                });
+
+                const data = await res.json();
+                typingIndicator.remove(); 
+
+                if (data.reply) {
+                    msgs.innerHTML += `<div class="bot-msg">${data.reply}</div>`;
+                } else {
+                    msgs.innerHTML += `<div class="bot-msg" style="color:red;">خطأ في استلام الرد.</div>`;
+                }
+            } catch (e) {
+                typingIndicator.remove();
+                msgs.innerHTML += `<div class="bot-msg" style="color:red;">فشل الاتصال بالمساعد.</div>`;
+            }
+            msgs.scrollTop = msgs.scrollHeight;
+        }
+
+        document.getElementById('chat-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMsg();
+        });
+    </script>
 </body>
 </html>
